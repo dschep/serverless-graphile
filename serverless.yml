@@ -1,0 +1,40 @@
+service: graphile
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: us-east-2 # much better than us-east-1 when using a VPC, which you should
+
+  environment:
+    APPEND_PLUGINS: ${opt:append-plugins, ""}
+    # You should probably store your creds in something like SSM or SecretsManager and fetch them
+    # with code in handler.js
+    DATABASE_URL: ${opt:database-url}
+    # TODO - test JWT
+    # JWT_SECRET: XXXXXXXXXXXXXXXXX
+
+  # You should probably have your DB in a VPC
+  # vpc:
+  #   securityGroupIds:
+  #     - ${output:infra:::network.privateSecurityGroup}
+  #     - ${output:infra:::network.defaultSecurityGroup}
+  #   subnetIds:
+  #     - ${output:infra:::network.subnetB}
+  #     - ${output:infra:::network.subnetC}
+
+functions:
+  graphile:
+    handler: handler.graphile
+    events:
+      - http:
+          path: /
+          method: post
+          cors: true
+
+plugins:
+  - serverless-plugin-scripts
+
+custom:
+  scripts:
+    hooks:
+      'before:package:createDeploymentArtifacts': npm i --no-save ${opt:append-plugins, ""}
