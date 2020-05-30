@@ -1,6 +1,7 @@
 # ⚡🐘🕸️ Serverless PostGraphile
 
-A lightweight implementation of PostGraphile on AWS Lambda using Serverless.
+A lightweight implementation of [PostGraphile](https://graphile.org) on
+[AWS Lambda](https://aws.amazon.com/lambda/) using [Serverless](https://serverless.com).
 
 
 ## Easy deploy
