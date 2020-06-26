@@ -13,7 +13,7 @@ npx serverless deploy --database-url postgresql://user:password@host/database
 ```
 
 ### Additional deploy options
-You can specify plugins to be loaded with a space delimited list with the `--apend-plugins` CLI
+You can specify graphile plugins to be loaded with a space delimited list with the `--append-plugins` CLI
 option. The plugins will be automatically installed on deploy. EG:
 ```
 npx serverless deploy \
